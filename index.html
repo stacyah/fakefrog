@@ -90,7 +90,7 @@
       background: var(--forest); border-radius: 2px;
     }
 
-    /* ── INTRO / ABOUT (top section) ── */
+    /* ── ABOUT ── */
     #about {
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
@@ -105,8 +105,6 @@
       max-width: 980px; width: 100%;
       animation: fadeUp .75s ease both;
     }
-
-    /* Photo */
     .about-photo-col {
       display: flex; flex-direction: column;
       align-items: center; gap: 1rem;
@@ -127,8 +125,6 @@
       border-radius: 999px; font-weight: 500;
       white-space: nowrap;
     }
-
-    /* Text */
     .about-text-col .label {
       font-family: 'Fredoka', sans-serif;
       font-size: .82rem; font-weight: 500;
@@ -180,7 +176,7 @@
     }
     .btn-ghost:hover { color: var(--sage-dark); border-color: var(--sage-pale); transform: translateY(-2px); }
 
-    /* ── SHARED SECTION STYLES ── */
+    /* ── SHARED ── */
     .section-inner { max-width: 980px; margin: 0 auto; }
     .section-tag {
       font-family: 'Fredoka', sans-serif;
@@ -209,6 +205,7 @@
       border: 1.5px solid var(--sage-pale);
       transition: transform .25s, box-shadow .25s;
       position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
     }
     .project-card::before {
       content: '';
@@ -224,14 +221,14 @@
       font-size: 1.25rem; font-weight: 600;
       color: var(--forest); margin-bottom: .45rem;
     }
-    .project-desc { font-size: .93rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.1rem; }
+    .project-desc { font-size: .93rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.1rem; flex: 1; }
     .project-stack { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.1rem; }
     .stack-tag {
       background: var(--cream); border: 1px solid var(--cream2);
       color: var(--text-muted); font-size: .75rem; font-weight: 500;
       padding: .2rem .7rem; border-radius: 999px;
     }
-    .project-links { display: flex; gap: .8rem; }
+    .project-links { display: flex; gap: .8rem; margin-top: auto; }
     .project-link {
       font-size: .85rem; font-weight: 600;
       color: var(--sage-dark); text-decoration: none;
@@ -241,9 +238,16 @@
 
     /* ── SKILLS ── */
     #skills { background: var(--sage-pale); padding: 6rem 2rem; }
+    .skills-categories { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem; }
+    .skills-group-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      color: var(--sage-dark);
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: .8rem;
+    }
     .skills-pond {
       display: flex; flex-wrap: wrap; gap: .8rem;
-      margin-top: 2.5rem;
     }
     .skill-pad {
       background: white;
@@ -348,7 +352,6 @@
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .reveal {
       opacity: 0; transform: translateY(20px);
       transition: opacity .55s ease, transform .55s ease;
@@ -394,7 +397,7 @@
     </button>
   </nav>
 
-  <!-- ── ABOUT / INTRO ── -->
+  <!-- ── ABOUT ── -->
   <section id="about">
     <div class="about-inner">
       <div class="about-photo-col">
@@ -406,7 +409,7 @@
         <h1>i'm <span>Stacy</span> ✿</h1>
         <p>CS grad, IT support specialist, and aspiring security engineer.</p>
         <p>my background is in <strong>IT support and systems administration</strong>, but i'm actively pushing into security. i've built homelabs from scratch, automated workflows with PowerShell, and set up my own monitoring systems.</p>
-        <p>currently <strong>open to new opportunities</strong>🐸</p>
+        <p>currently <strong>open to new opportunities</strong> 🐸</p>
         <div class="about-tags">
           <span class="tag">IT support</span>
           <span class="tag">systems admin</span>
@@ -432,35 +435,57 @@
       <span class="section-tag">✿ my work</span>
       <h2 class="section-title">things i've built</h2>
       <div class="projects-grid">
+
         <div class="project-card reveal">
           <span class="project-emoji">🏢</span>
           <h3 class="project-title">Active Directory Automated Lab</h3>
-          <p class="project-desc">built a Windows Server 2022 domain lab with Active Directory, GPOs, and PowerShell scripts to automate user onboarding/offboarding; simulating a real enterprise environment in VirtualBox.</p>
+          <p class="project-desc">Windows Server 2022 domain lab with Active Directory, GPOs, and PowerShell scripts to automate user onboarding and offboarding; simulating a real enterprise identity lifecycle in VirtualBox.</p>
           <div class="project-stack">
             <span class="stack-tag">Active Directory</span>
             <span class="stack-tag">PowerShell</span>
             <span class="stack-tag">Windows Server</span>
             <span class="stack-tag">VirtualBox</span>
+            <span class="stack-tag">GPO</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/stacyah" target="_blank" class="project-link">↗ github</a>
+            <a href="https://github.com/stacyah/ad-automation" target="_blank" class="project-link">↗ github</a>
           </div>
         </div>
+
         <div class="project-card reveal" style="transition-delay:.1s">
           <span class="project-emoji">📷</span>
           <h3 class="project-title">Raspberry Pi Security Monitor</h3>
-          <p class="project-desc">deployed a Linux-based home security system with motion detection, Splunk SIEM for real-time event logging, SSH key hardening, UFW firewall rules, and a Flask web UI for incident review.</p>
+          <p class="project-desc">Motion-detection security system on a Raspberry Pi with OpenCV and a Flask web UI for captured events. Security events are forwarded to Splunk for real-time alerting and SOC-style dashboards. OS hardened with SSH key auth, UFW, and Fail2ban.</p>
           <div class="project-stack">
             <span class="stack-tag">Linux</span>
             <span class="stack-tag">Python</span>
             <span class="stack-tag">Splunk</span>
             <span class="stack-tag">Flask</span>
             <span class="stack-tag">OpenCV</span>
+            <span class="stack-tag">Fail2ban</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/stacyah" target="_blank" class="project-link">↗ github</a>
+            <a href="https://github.com/stacyah/RaspberryPi_Security_Camera" target="_blank" class="project-link">↗ github</a>
           </div>
         </div>
+
+        <div class="project-card reveal" style="transition-delay:.2s">
+          <span class="project-emoji">🔒</span>
+          <h3 class="project-title">WireGuard VPN Gateway</h3>
+          <p class="project-desc">Full-tunnel WireGuard VPN on Oracle Cloud's free-tier ARM instance, provisioned end-to-end with Terraform and Ansible. Routes all client traffic through an encrypted OCI server. Includes troubleshooting for OCI-specific MTU and iptables FORWARD chain quirks.</p>
+          <div class="project-stack">
+            <span class="stack-tag">WireGuard</span>
+            <span class="stack-tag">Terraform</span>
+            <span class="stack-tag">Ansible</span>
+            <span class="stack-tag">Oracle Cloud</span>
+            <span class="stack-tag">Ubuntu</span>
+            <span class="stack-tag">iptables</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/stacyah/wireguard-oci-gateway" target="_blank" class="project-link">↗ github</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -475,19 +500,45 @@
       <span class="section-tag">✿ skills</span>
       <h2 class="section-title">the toolbox</h2>
       <p style="color:var(--text-muted);margin-top:.4rem">things i know how to use</p>
-      <div class="skills-pond">
-        <span class="skill-pad">🐧 Linux</span>
-        <span class="skill-pad">🐍 Python</span>
-        <span class="skill-pad">⚡ PowerShell</span>
-        <span class="skill-pad">🏢 Active Directory</span>
-        <span class="skill-pad">🐳 Docker</span>
-        <span class="skill-pad">📊 Splunk</span>
-        <span class="skill-pad">🎫 ServiceNow</span>
-        <span class="skill-pad">📦 VirtualBox</span>
-        <span class="skill-pad">🔑 SSH</span>
-        <span class="skill-pad">🌿 Git</span>
-        <span class="skill-pad">🛡️ UFW / Fail2ban</span>
-        <span class="skill-pad">☁️ Citrix</span>
+
+      <div class="skills-categories">
+        <div>
+          <div class="skills-group-label">Scripting & query</div>
+          <div class="skills-pond">
+            <span class="skill-pad">🐍 Python</span>
+            <span class="skill-pad">⚡ PowerShell</span>
+            <span class="skill-pad">🐚 Bash</span>
+            <span class="skill-pad">🗄️ SQL</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-group-label">Security tools</div>
+          <div class="skills-pond">
+            <span class="skill-pad">📊 Splunk</span>
+            <span class="skill-pad">📡 Wireshark</span>
+            <span class="skill-pad">🗺️ Nmap</span>
+            <span class="skill-pad">🛡️ UFW / Fail2ban</span>
+            <span class="skill-pad">🔑 SSH</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-group-label">Infrastructure & environment</div>
+          <div class="skills-pond">
+            <span class="skill-pad">🐧 Linux</span>
+            <span class="skill-pad">🏢 Active Directory</span>
+            <span class="skill-pad">🪟 Windows Server</span>
+            <span class="skill-pad">🐳 Docker</span>
+            <span class="skill-pad">📦 VirtualBox</span>
+            <span class="skill-pad">🌿 Git</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-group-label">IT & enterprise tools</div>
+          <div class="skills-pond">
+            <span class="skill-pad">🎫 ServiceNow</span>
+            <span class="skill-pad">☁️ Citrix</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -504,14 +555,19 @@
       <p style="color:var(--text-muted);margin-top:.4rem">updated whenever something changes</p>
       <div class="now-grid">
         <div class="now-card reveal">
-          <div class="now-card-label">📚 learning</div>
+          <div class="now-card-label">📚 studying</div>
           <div class="now-card-content">CompTIA Security+</div>
-          <div class="now-card-sub">still going through the material; covering domains, vulnerabilities, cryptography, and more. exam coming up.</div>
+          <div class="now-card-sub">working through all domains; threats, vulnerabilities, architecture, cryptography, and compliance. exam coming up soon.</div>
         </div>
         <div class="now-card reveal" style="transition-delay:.1s">
-          <div class="now-card-label">💻 working on</div>
-          <div class="now-card-content">homelab projects</div>
-          <div class="now-card-sub">expanding my homelab.</div>
+          <div class="now-card-label">💻 building</div>
+          <div class="now-card-content">expanding the homelab</div>
+          <div class="now-card-sub">setting up network segmentation and a pfSense firewall to practice traffic filtering and VLAN configuration.</div>
+        </div>
+        <div class="now-card reveal" style="transition-delay:.2s">
+          <div class="now-card-label">🎯 looking for</div>
+          <div class="now-card-content">IT, sysadmin, or security roles</div>
+          <div class="now-card-sub">open to roles where I can keep building hands-on security skills. remote or hybrid preferred.</div>
         </div>
       </div>
     </div>
