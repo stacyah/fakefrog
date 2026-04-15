@@ -1,2 +1,588 @@
-# fakefrog.com
-Personal portfolio and brand site.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>stacy hilliard ✿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f0ede6;
+      --cream2: #e2ddd4;
+      --sage: #7b9e6c;
+      --sage-light: #a4c494;
+      --sage-pale: #d0e5c8;
+      --sage-dark: #4a6e38;
+      --forest: #2d4a1e;
+      --blush: #f2a8b2;
+      --blush-pale: #fdeef0;
+      --teal: #6aafa0;
+      --text: #2d2820;
+      --text-muted: #7a6e64;
+      --white: #fafaf8;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(circle, #7b9e6c18 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(240,237,230,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1.5px solid var(--sage-pale);
+      transition: transform .3s ease;
+    }
+    .nav-logo {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem; font-weight: 600;
+      color: var(--forest);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .92rem; font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: var(--sage); border-radius: 2px;
+      transition: width .2s;
+    }
+    .nav-links a:hover { color: var(--sage-dark); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--forest); border-radius: 2px;
+    }
+
+    /* ── INTRO / ABOUT (top section) ── */
+    #about {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8rem 2rem 5rem;
+      background: var(--white);
+      position: relative;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem; align-items: center;
+      max-width: 980px; width: 100%;
+      animation: fadeUp .75s ease both;
+    }
+
+    /* Photo */
+    .about-photo-col {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+    }
+    .about-photo {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 4px solid var(--sage-pale);
+      box-shadow: 0 10px 36px rgba(45,74,30,.15);
+    }
+    .mood-tag {
+      background: var(--blush-pale);
+      border: 1.5px solid var(--blush);
+      color: var(--text-muted);
+      font-size: .8rem; padding: .3rem .9rem;
+      border-radius: 999px; font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Text */
+    .about-text-col .label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      color: var(--sage);
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: .4rem; display: block;
+    }
+    .about-text-col h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 600; line-height: 1.1;
+      color: var(--forest);
+      margin-bottom: 1rem;
+    }
+    .about-text-col h1 span { color: var(--sage); }
+    .about-text-col p {
+      font-size: 1.03rem; line-height: 1.82;
+      color: var(--text-muted); margin-bottom: 1rem;
+    }
+    .about-text-col p strong { color: var(--forest); font-weight: 600; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.2rem 0 1.8rem; }
+    .tag {
+      background: var(--sage-pale); color: var(--sage-dark);
+      font-size: .82rem; font-weight: 500;
+      padding: .28rem .85rem; border-radius: 999px;
+    }
+    .about-buttons { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--sage-dark); color: var(--white);
+      text-decoration: none;
+      padding: .75rem 1.55rem;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: .98rem; font-weight: 500;
+      transition: transform .2s, background .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--forest); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: .75rem 1.1rem;
+      border-radius: 999px;
+      font-size: .9rem; font-weight: 500;
+      border: 1.5px solid var(--cream2);
+      background: var(--cream);
+      transition: color .2s, border-color .2s, transform .2s;
+    }
+    .btn-ghost:hover { color: var(--sage-dark); border-color: var(--sage-pale); transform: translateY(-2px); }
+
+    /* ── SHARED SECTION STYLES ── */
+    .section-inner { max-width: 980px; margin: 0 auto; }
+    .section-tag {
+      font-family: 'Fredoka', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      color: var(--sage);
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: .4rem; display: block;
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+      font-weight: 600; color: var(--forest);
+    }
+    .wave { display: block; width: 100%; overflow: hidden; line-height: 0; }
+
+    /* ── PROJECTS ── */
+    #projects { padding: 6rem 2rem; background: var(--cream); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.4rem; margin-top: 3rem;
+    }
+    .project-card {
+      background: var(--white);
+      border-radius: 22px; padding: 1.8rem;
+      border: 1.5px solid var(--sage-pale);
+      transition: transform .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--sage), var(--teal));
+      opacity: 0; transition: opacity .25s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 14px 38px rgba(45,74,30,.1); }
+    .project-card:hover::before { opacity: 1; }
+    .project-emoji { font-size: 2rem; margin-bottom: .9rem; display: block; }
+    .project-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--forest); margin-bottom: .45rem;
+    }
+    .project-desc { font-size: .93rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.1rem; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.1rem; }
+    .stack-tag {
+      background: var(--cream); border: 1px solid var(--cream2);
+      color: var(--text-muted); font-size: .75rem; font-weight: 500;
+      padding: .2rem .7rem; border-radius: 999px;
+    }
+    .project-links { display: flex; gap: .8rem; }
+    .project-link {
+      font-size: .85rem; font-weight: 600;
+      color: var(--sage-dark); text-decoration: none;
+      transition: color .2s;
+    }
+    .project-link:hover { color: var(--forest); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--sage-pale); padding: 6rem 2rem; }
+    .skills-pond {
+      display: flex; flex-wrap: wrap; gap: .8rem;
+      margin-top: 2.5rem;
+    }
+    .skill-pad {
+      background: white;
+      border: 2px solid rgba(123,158,108,.28);
+      border-radius: 999px;
+      padding: .6rem 1.3rem;
+      font-family: 'Fredoka', sans-serif;
+      font-size: .96rem; font-weight: 500;
+      color: var(--forest);
+      display: flex; align-items: center; gap: .45rem;
+      transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
+    }
+    .skill-pad:hover {
+      transform: translateY(-3px);
+      background: var(--sage-pale);
+      border-color: var(--sage);
+      box-shadow: 0 6px 18px rgba(74,110,56,.12);
+    }
+
+    /* ── NOW ── */
+    #now { padding: 6rem 2rem; background: var(--white); }
+    .now-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem; margin-top: 2.5rem;
+    }
+    .now-card {
+      background: var(--cream); border-radius: 22px;
+      padding: 2rem; border: 1.5px solid var(--cream2);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .now-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(45,74,30,.08); }
+    .now-card-label {
+      font-size: .74rem; font-weight: 700;
+      color: var(--sage); text-transform: uppercase;
+      letter-spacing: .1em; margin-bottom: .7rem;
+    }
+    .now-card-content {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem; font-weight: 500;
+      color: var(--forest); line-height: 1.4;
+    }
+    .now-card-sub { font-size: .88rem; color: var(--text-muted); margin-top: .4rem; line-height: 1.55; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--forest);
+      padding: 7rem 2rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .contact-inner { position: relative; z-index: 1; }
+    .contact-frog { display: flex; justify-content: center; margin-bottom: 1.8rem; }
+    .contact-frog svg { width: 90px; }
+    .contact-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 600; color: var(--sage-pale);
+      margin-bottom: .9rem;
+    }
+    .contact-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,.55);
+      margin-bottom: 2.4rem; max-width: 460px;
+      margin-left: auto; margin-right: auto; line-height: 1.7;
+    }
+    .contact-links { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .78rem 1.6rem; border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: .98rem; font-weight: 500;
+      text-decoration: none;
+      transition: transform .2s, opacity .2s;
+    }
+    .contact-btn:hover { transform: translateY(-2px); opacity: .88; }
+    .contact-btn-primary { background: var(--sage); color: white; }
+    .contact-btn-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.25);
+      color: rgba(255,255,255,.75);
+    }
+    .contact-btn-ghost:hover { border-color: rgba(255,255,255,.5); }
+
+    footer {
+      background: var(--forest);
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 1.4rem 2rem;
+      text-align: center;
+      font-size: .82rem;
+      color: rgba(255,255,255,.35);
+    }
+    footer a { color: rgba(255,255,255,.5); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,.75); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .about-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+      .about-photo-col { order: -1; }
+      .about-photo { width: 180px; height: 180px; }
+      .about-tags { justify-content: center; }
+      .about-buttons { justify-content: center; }
+      .nav-links {
+        display: none; flex-direction: column; gap: 1rem;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(240,237,230,.97);
+        padding: 1.5rem 2.5rem;
+        border-bottom: 1.5px solid var(--sage-pale);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="mainNav">
+    <a href="#about" class="nav-logo">🐸 fakefrog.com</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#now">now</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── ABOUT / INTRO ── -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-photo-col">
+        <img src="photo.jpg" alt="Stacy Hilliard" class="about-photo">
+        <span class="mood-tag">🌿 open to opportunities</span>
+      </div>
+      <div class="about-text-col">
+        <span class="label">✿ hey there</span>
+        <h1>i'm <span>Stacy</span> ✿</h1>
+        <p>CS grad, IT support specialist, and aspiring security engineer.</p>
+        <p>my background is in <strong>IT support and systems administration</strong>, but i'm actively pushing into security. i've built homelabs from scratch, automated workflows with PowerShell, and set up my own monitoring systems.</p>
+        <p>currently <strong>open to new opportunities</strong>🐸</p>
+        <div class="about-tags">
+          <span class="tag">IT support</span>
+          <span class="tag">systems admin</span>
+          <span class="tag">security</span>
+        </div>
+        <div class="about-buttons">
+          <a href="#projects" class="btn-primary">See my work ↓</a>
+          <a href="https://github.com/stacyah" target="_blank" class="btn-ghost">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/stacyah/" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+          <a href="StacyHilliardResume.pdf" target="_blank" class="btn-ghost">Resume ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--white)">
+    <path d="M0,18 C480,62 960,0 1440,28 L1440,60 L0,60 Z" fill="var(--cream)"/>
+  </svg>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects">
+    <div class="section-inner">
+      <span class="section-tag">✿ my work</span>
+      <h2 class="section-title">things i've built</h2>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <span class="project-emoji">🏢</span>
+          <h3 class="project-title">Active Directory Automated Lab</h3>
+          <p class="project-desc">built a Windows Server 2022 domain lab with Active Directory, GPOs, and PowerShell scripts to automate user onboarding/offboarding; simulating a real enterprise environment in VirtualBox.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Active Directory</span>
+            <span class="stack-tag">PowerShell</span>
+            <span class="stack-tag">Windows Server</span>
+            <span class="stack-tag">VirtualBox</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/stacyah" target="_blank" class="project-link">↗ github</a>
+          </div>
+        </div>
+        <div class="project-card reveal" style="transition-delay:.1s">
+          <span class="project-emoji">📷</span>
+          <h3 class="project-title">Raspberry Pi Security Monitor</h3>
+          <p class="project-desc">deployed a Linux-based home security system with motion detection, Splunk SIEM for real-time event logging, SSH key hardening, UFW firewall rules, and a Flask web UI for incident review.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Linux</span>
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Splunk</span>
+            <span class="stack-tag">Flask</span>
+            <span class="stack-tag">OpenCV</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/stacyah" target="_blank" class="project-link">↗ github</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--cream)">
+    <path d="M0,38 C300,0 1140,62 1440,18 L1440,60 L0,60 Z" fill="var(--sage-pale)"/>
+  </svg>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills">
+    <div class="section-inner">
+      <span class="section-tag">✿ skills</span>
+      <h2 class="section-title">the toolbox</h2>
+      <p style="color:var(--text-muted);margin-top:.4rem">things i know how to use</p>
+      <div class="skills-pond">
+        <span class="skill-pad">🐧 Linux</span>
+        <span class="skill-pad">🐍 Python</span>
+        <span class="skill-pad">⚡ PowerShell</span>
+        <span class="skill-pad">🏢 Active Directory</span>
+        <span class="skill-pad">🐳 Docker</span>
+        <span class="skill-pad">📊 Splunk</span>
+        <span class="skill-pad">🎫 ServiceNow</span>
+        <span class="skill-pad">📦 VirtualBox</span>
+        <span class="skill-pad">🔑 SSH</span>
+        <span class="skill-pad">🌿 Git</span>
+        <span class="skill-pad">🛡️ UFW / Fail2ban</span>
+        <span class="skill-pad">☁️ Citrix</span>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--sage-pale)">
+    <path d="M0,30 C480,62 960,0 1440,38 L1440,60 L0,60 Z" fill="var(--white)"/>
+  </svg>
+
+  <!-- ── NOW ── -->
+  <section id="now">
+    <div class="section-inner">
+      <span class="section-tag">✿ right now</span>
+      <h2 class="section-title">what i'm up to</h2>
+      <p style="color:var(--text-muted);margin-top:.4rem">updated whenever something changes</p>
+      <div class="now-grid">
+        <div class="now-card reveal">
+          <div class="now-card-label">📚 learning</div>
+          <div class="now-card-content">CompTIA Security+</div>
+          <div class="now-card-sub">still going through the material; covering domains, vulnerabilities, cryptography, and more. exam coming up.</div>
+        </div>
+        <div class="now-card reveal" style="transition-delay:.1s">
+          <div class="now-card-label">💻 working on</div>
+          <div class="now-card-content">homelab projects</div>
+          <div class="now-card-sub">expanding my homelab.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--white)">
+    <path d="M0,10 C360,62 1080,0 1440,48 L1440,60 L0,60 Z" fill="var(--forest)"/>
+  </svg>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-frog">
+        <svg viewBox="0 0 200 228" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="28" rx="30" ry="9" fill="none" stroke="#fcd97e" stroke-width="4"/>
+          <ellipse cx="48" cy="120" rx="38" ry="24" fill="rgba(255,255,255,.2)" transform="rotate(-28,48,120)"/>
+          <ellipse cx="152" cy="120" rx="38" ry="24" fill="rgba(255,255,255,.2)" transform="rotate(28,152,120)"/>
+          <ellipse cx="72" cy="72" rx="24" ry="20" fill="#7b9e6c"/>
+          <ellipse cx="128" cy="72" rx="24" ry="20" fill="#7b9e6c"/>
+          <ellipse cx="72" cy="87" rx="20" ry="8" fill="#6a8e5c"/>
+          <ellipse cx="128" cy="87" rx="20" ry="8" fill="#6a8e5c"/>
+          <ellipse cx="100" cy="146" rx="64" ry="58" fill="#7b9e6c"/>
+          <ellipse cx="100" cy="157" rx="38" ry="38" fill="#c2dab0"/>
+          <ellipse cx="43" cy="152" rx="20" ry="15" fill="#7b9e6c" transform="rotate(-25,43,152)"/>
+          <ellipse cx="157" cy="152" rx="20" ry="15" fill="#7b9e6c" transform="rotate(25,157,152)"/>
+          <path d="M60 67 Q72 58 84 67" fill="none" stroke="#1e2e18" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M116 67 Q128 58 140 67" fill="none" stroke="#1e2e18" stroke-width="3.5" stroke-linecap="round"/>
+          <ellipse cx="56" cy="112" rx="15" ry="10" fill="#f2a8b2" opacity=".6"/>
+          <ellipse cx="144" cy="112" rx="15" ry="10" fill="#f2a8b2" opacity=".6"/>
+          <path d="M80 134 Q100 148 120 134" fill="none" stroke="#1e2e18" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="contact-title">let's connect ✿</h2>
+      <p class="contact-sub">open to IT, security, or sysadmin roles. or just want to talk tech? reach out!</p>
+      <div class="contact-links">
+        <a href="mailto:stacyhilliardcontact@gmail.com" class="contact-btn contact-btn-primary">✉ send an email</a>
+        <a href="https://github.com/stacyah" target="_blank" class="contact-btn contact-btn-ghost">GitHub</a>
+        <a href="https://www.linkedin.com/in/stacyah/" target="_blank" class="contact-btn contact-btn-ghost">LinkedIn</a>
+        <a href="StacyHilliardResume.pdf" target="_blank" class="contact-btn contact-btn-ghost">resume ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    made with ♡ and html &nbsp;·&nbsp; <a href="https://fakefrog.com">fakefrog.com</a>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    let lastScroll = 0;
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      if (cur > 80 && cur > lastScroll) nav.style.transform = 'translateY(-100%)';
+      else nav.style.transform = 'translateY(0)';
+      lastScroll = cur;
+    }, { passive: true });
+
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
+</body>
+</html>
