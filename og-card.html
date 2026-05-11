@@ -13,40 +13,39 @@
   }
   .card {
     width: 100%; height: 100%;
-    background: #2d3e1f; /* forest */
-    display: flex; flex-direction: column;
+    background: #2d3e1f;
+    display: flex;
     align-items: center; justify-content: center;
     position: relative;
   }
   .card::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px);
     background-size: 30px 30px;
   }
-  .frog { font-size: 120px; margin-bottom: 10px; position: relative; z-index: 1; }
-  .name {
-    font-size: 72px; font-weight: 700;
-    color: #90b871; /* leaf */
+  .content {
     position: relative; z-index: 1;
+    text-align: center;
+  }
+  .name {
+    font-size: 64px; font-weight: 700;
+    color: #90b871;
     letter-spacing: -0.02em;
+    margin-bottom: 8px;
   }
   .domain {
-    font-size: 32px; font-weight: 500;
-    color: rgba(255,255,255,.55);
-    margin-top: 8px;
-    position: relative; z-index: 1;
-  }
-  .flower {
-    color: #fcd97e;
+    font-size: 28px; font-weight: 400;
+    color: rgba(255,255,255,.50);
   }
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="frog">🐸</div>
-  <div class="name">Stacy Hilliard <span class="flower">✿</span></div>
-  <div class="domain">fakefrog.com</div>
+  <div class="content">
+    <div class="name">Stacy Hilliard</div>
+    <div class="domain">fakefrog.com</div>
+  </div>
 </div>
 </body>
 </html>
