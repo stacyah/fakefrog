@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OG Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 627px;
+    overflow: hidden;
+    font-family: 'Anybody', sans-serif;
+  }
+  .card {
+    width: 100%; height: 100%;
+    background: #2d3e1f; /* forest */
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .frog { font-size: 120px; margin-bottom: 10px; position: relative; z-index: 1; }
+  .name {
+    font-size: 72px; font-weight: 700;
+    color: #90b871; /* leaf */
+    position: relative; z-index: 1;
+    letter-spacing: -0.02em;
+  }
+  .domain {
+    font-size: 32px; font-weight: 500;
+    color: rgba(255,255,255,.55);
+    margin-top: 8px;
+    position: relative; z-index: 1;
+  }
+  .flower {
+    color: #fcd97e;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="frog">🐸</div>
+  <div class="name">Stacy Hilliard <span class="flower">✿</span></div>
+  <div class="domain">fakefrog.com</div>
+</div>
+</body>
+</html>
